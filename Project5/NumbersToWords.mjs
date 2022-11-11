@@ -1,7 +1,10 @@
+// This program number convertion into words range is 0 - 100000000000000(one hundred trillion)
+
 "use strict";
 import promptSync from "prompt-sync";
 const prompt = promptSync();
 
+// This function is for numbers that is less than 100
 export function less_than_hundred(number) {
   let inputArray = Array.from(String(number), Number);
   if (number < 20 && number >= 0) {
@@ -13,6 +16,7 @@ export function less_than_hundred(number) {
   }
 }
 
+// This function is for numbers that is less than 1000
 export function hundred(number) {
   let inputArray = Array.from(String(number), Number);
   if (number % 100 === 0) {
@@ -23,6 +27,7 @@ export function hundred(number) {
   )}`;
 }
 
+// This function is for numbers that is greater than 999
 export function bigNumber(number) {
   let internation_system = ["thousand", "million", "billion", "trillion"];
   const numberArray = Array.from(String(number), Number);
@@ -31,6 +36,7 @@ export function bigNumber(number) {
   let number_organizing = [];
   let finalOutput = [];
 
+  // This loop is slicing the numbers and push them into array
   while (numberArray.length > 0) {
     let tempArray = [];
     let subValue = [];
@@ -48,6 +54,7 @@ export function bigNumber(number) {
   iterator = 0;
   let finalNumber = undefined;
 
+  // This loop is converting the numbers into words
   while (number_organizing.length > 0) {
     finalNumber = number_organizing.pop();
     if (iterator == 0 || finalNumber == 0) {
@@ -71,6 +78,8 @@ export function bigNumber(number) {
     }
     ++iterator;
   }
+
+  // The following operations removing the extra zeros in the array
   let zeroRemoval = "zero";
   finalOutput = finalOutput.filter((item) => item !== zeroRemoval);
   finalOutput.reverse();
@@ -78,8 +87,10 @@ export function bigNumber(number) {
   return finalOutput;
 }
 
+// Here, we get the user input.
 const userInput = +prompt("Enter a number: ");
 
+// Array of some basic numbers
 const basicNumbers = [
   "zero",
   "one",
@@ -103,6 +114,7 @@ const basicNumbers = [
   "nineteen",
 ];
 
+// Array of some more basic numbers
 const tenthNumbers = [
   "twenty",
   "thirty",
@@ -114,6 +126,7 @@ const tenthNumbers = [
   "ninety",
 ];
 
+// Here, we set the rules that which function() is best for given number and then pass the number onto it for further processing.
 if (userInput >= 0 && userInput < 100) {
   console.log(less_than_hundred(userInput));
 } else if (userInput > 99 && userInput < 1000) {
